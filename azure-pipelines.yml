@@ -35,7 +35,7 @@ jobs:
       azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
-      inlineScript: 'az storage container create --name tfstate --account-name $(PREFIX)tfstor'
+      inlineScript: 'az storage container create --name tfstate --account-name $(PREFIX)tfstor1'
 
 - job: Deploy
   displayName: Build and Deploy
