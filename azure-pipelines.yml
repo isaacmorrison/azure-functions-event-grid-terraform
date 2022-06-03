@@ -17,14 +17,14 @@ jobs:
   - task: AzureCLI@2
     displayName: Create resource group
     inputs:
-      azureSubscription: 'my-azure'
+      azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: 'az group create --name  $(PREFIX)-sample-rg --location $(LOCATION) --tags sample=azure-functions-event-grid-terraform'
   - task: AzureCLI@2
     displayName: Create tfstate storage account
     inputs:
-      azureSubscription: 'my-azure'
+      azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: 'az storage account create --resource-group  $(PREFIX)-sample-rg --name $(PREFIX)tfstor --kind StorageV2 --tags sample=azure-functions-event-grid-terraform'
@@ -32,7 +32,7 @@ jobs:
   - task: AzureCLI@2
     displayName: Create tfstate container
     inputs:
-      azureSubscription: 'my-azure'
+      azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: 'az storage container create --name tfstate --account-name $(PREFIX)tfstor'
@@ -74,7 +74,7 @@ jobs:
       provider: 'azurerm'
       command: 'init'
       workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform'
-      backendServiceArm: 'my-azure'
+      backendServiceArm: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       backendAzureRmResourceGroupName: '$(PREFIX)-sample-rg'
       backendAzureRmStorageAccountName: '$(PREFIX)tfstor'
       backendAzureRmContainerName: 'tfstate'
@@ -87,12 +87,12 @@ jobs:
       command: 'apply'
       commandOptions: '-target module.functions -var "prefix=$(PREFIX)" -var "location=$(LOCATION)"'
       workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform'
-      environmentServiceNameAzureRM: 'my-azure'
+      environmentServiceNameAzureRM: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
 
   - task: AzureFunctionApp@1
     displayName: '🥓 Deploy Function App'
     inputs:
-      azureSubscription: 'my-azure'
+      azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       appType: 'functionApp'
       appName: '$(PREFIX)-fxn'
       package: '$(Build.ArtifactStagingDirectory)'
@@ -105,4 +105,4 @@ jobs:
       command: 'apply'
       commandOptions: '-var "prefix=$(PREFIX)" -var "location=$(LOCATION)"'
       workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform'
-      environmentServiceNameAzureRM: 'my-azure'
+      environmentServiceNameAzureRM: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
