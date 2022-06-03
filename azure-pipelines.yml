@@ -20,14 +20,14 @@ jobs:
       azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
-      inlineScript: 'az group create --name  $(PREFIX)-sample-rg --location $(LOCATION) --tags sample=azure-functions-event-grid-terraform'
+      inlineScript: 'az group create --name  $(PREFIX)-storage-rg --location $(LOCATION) --tags sample=azure-functions-event-grid-terraform'
   - task: AzureCLI@2
     displayName: Create tfstate storage account
     inputs:
       azureSubscription: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
-      inlineScript: 'az storage account create --resource-group  $(PREFIX)-sample-rg --name $(PREFIX)tfstor --kind StorageV2 --tags sample=azure-functions-event-grid-terraform'
+      inlineScript: 'az storage account create --resource-group  $(PREFIX)-storage-rg --name $(PREFIX)tfstor1 --kind StorageV2 --tags sample=azure-functions-event-grid-terraform'
 
   - task: AzureCLI@2
     displayName: Create tfstate container
@@ -75,7 +75,7 @@ jobs:
       command: 'init'
       workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform'
       backendServiceArm: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
-      backendAzureRmResourceGroupName: '$(PREFIX)-sample-rg'
+      backendAzureRmResourceGroupName: '$(PREFIX)-storage-rg'
       backendAzureRmStorageAccountName: '$(PREFIX)tfstor'
       backendAzureRmContainerName: 'tfstate'
       backendAzureRmKey: 'terraform.tfstate'
