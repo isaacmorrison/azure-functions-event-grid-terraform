@@ -76,7 +76,7 @@ jobs:
       workingDirectory: '$(System.DefaultWorkingDirectory)/infrastructure/terraform'
       backendServiceArm: 'Aya-DevOps-PoC-Ent-Subscription-service-connection'
       backendAzureRmResourceGroupName: '$(PREFIX)-storage-rg'
-      backendAzureRmStorageAccountName: '$(PREFIX)tfstor'
+      backendAzureRmStorageAccountName: '$(PREFIX)tfstor1'
       backendAzureRmContainerName: 'tfstate'
       backendAzureRmKey: 'terraform.tfstate'
 
