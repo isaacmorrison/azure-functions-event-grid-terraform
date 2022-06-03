@@ -68,7 +68,7 @@ jobs:
       TargetFolder: 'infrastructure/terraform'
       OverWrite: true
 
-  - task: TerraformTaskV1@0
+  - task: TerraformTaskV3@3
     displayName: 'tf init'
     inputs:
       provider: 'azurerm'
@@ -80,7 +80,7 @@ jobs:
       backendAzureRmContainerName: 'tfstate'
       backendAzureRmKey: 'terraform.tfstate'
 
-  - task: TerraformTaskV1@0
+  - task: TerraformTaskV3@3
     displayName: 'TF 🍔 "top bun" (tf apply -target module.functions -var "prefix=$(PREFIX)" -var "location=$(LOCATION)")'
     inputs:
       provider: 'azurerm'
@@ -98,7 +98,7 @@ jobs:
       package: '$(Build.ArtifactStagingDirectory)'
       deploymentMethod: 'auto'
 
-  - task: TerraformTaskV1@0
+  - task: TerraformTaskV3@3
     displayName: 'TF 🍔 "bottom bun" (tf apply -var "prefix=$(PREFIX)" -var "location=$(LOCATION)")'
     inputs:
       provider: 'azurerm'
