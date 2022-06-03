@@ -7,7 +7,7 @@ pool:
 variables:
   LOCATION: westus
   # Uncomment & change this to something more unique before running
-  # PREFIX: azuresample
+  PREFIX: ayasamp
 
 jobs:
 - job: SetupAzureTFBackend
